@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - Aken Diandra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom gradient */
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        /* Hover effects */
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .skill-card {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Education card hover effect */
+        .education-card {
+            transition: all 0.3s ease;
+        }
+        
+        .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Timeline line */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: #e5e7eb;
+            z-index: -1;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+        }
+        
+        /* Login page styles */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .login-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .main-content {
+            display: none;
+        }
+        
+        .history-item {
+            transition: all 0.3s ease;
+        }
+        
+        .history-item:hover {
+            transform: translateX(5px);
+            background-color: #f3f4f6;
+        }
+        
+        /* Demo button styles */
+        .demo-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Login Page -->
+    <div id="login-page" class="login-container">
+        <div class="login-form">
+            <div class="text-center mb-6">
+                <div class="text-3xl font-bold text-purple-600 mb-2">AD</div>
+                <h2 class="text-2xl font-semibold text-gray-800">Selamat Datang</h2>
+                <p class="text-gray-600 mt-2">Masuk dengan nama Anda untuk melanjutkan</p>
+            </div>
+            <form id="login-form">
+                <div class="mb-6">
+                    <label for="username" class="block text-gray-700 font-semibold mb-2">Nama Pengguna</label>
+                    <input type="text" id="username" name="username" required 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition"
+                        placeholder="Masukkan nama Anda">
+                </div>
+                <button type="submit" 
+                    class="w-full bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-700 transition">
+                    Masuk
+                </button>
+            </form>
+            <div class="mt-6 text-center text-sm text-gray-600">
+                <p>Tidak perlu password. Cukup masukkan nama Anda.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="main-content">
+        <!-- Navigation -->
+        <nav class="fixed w-full bg-white shadow-md z-50">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="text-2xl font-bold text-purple-600">AD</div>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#home" class="nav-link text-gray-700 hover:text-purple-600 transition">Beranda</a>
+                        <a href="#about" class="nav-link text-gray-700 hover:text-purple-600 transition">Tentang</a>
+                        <a href="#education" class="nav-link text-gray-700 hover:text-purple-600 transition">Pendidikan</a>
+                        <a href="#skills" class="nav-link text-gray-700 hover:text-purple-600 transition">Keahlian</a>
+                        <a href="#projects" class="nav-link text-gray-700 hover:text-purple-600 transition">Proyek</a>
+                        <a href="#history" class="nav-link text-gray-700 hover:text-purple-600 transition">Riwayat</a>
+                        <a href="#contact" class="nav-link text-gray-700 hover:text-purple-600 transition">Kontak</a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="hidden md:flex items-center">
+                            <i class="fas fa-user-circle text-purple-600 mr-2"></i>
+                            <span id="user-display" class="text-gray-700"></span>
+                        </div>
+                        <button id="logout-btn" class="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-600 transition">
+                            Keluar
+                        </button>
+                        <button id="mobile-menu-btn" class="md:hidden">
+                            <i class="fas fa-bars text-2xl text-gray-700"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+                <div class="px-6 py-4 space-y-3">
+                    <div class="flex items-center pb-3 border-b">
+                        <i class="fas fa-user-circle text-purple-600 mr-2"></i>
+                        <span id="mobile-user-display" class="text-gray-700"></span>
+                    </div>
+                    <a href="#home" class="block text-gray-700 hover:text-purple-600 transition">Beranda</a>
+                    <a href="#about" class="block text-gray-700 hover:text-purple-600 transition">Tentang</a>
+                    <a href="#education" class="block text-gray-700 hover:text-purple-600 transition">Pendidikan</a>
+                    <a href="#skills" class="block text-gray-700 hover:text-purple-600 transition">Keahlian</a>
+                    <a href="#projects" class="block text-gray-700 hover:text-purple-600 transition">Proyek</a>
+                    <a href="#history" class="block text-gray-700 hover:text-purple-600 transition">Riwayat</a>
+                    <a href="#contact" class="block text-gray-700 hover:text-purple-600 transition">Kontak</a>
+                    <button id="mobile-logout-btn" class="w-full bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-600 transition mt-3">
+                        Keluar
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="pt-20 min-h-screen flex items-center gradient-bg">
+            <div class="container mx-auto px-6 py-20">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="md:w-1/2 text-white mb-10 md:mb-0 animate-fadeInUp">
+                        <h1 class="text-4xl md:text-6xl font-bold mb-4">Perkenalkan Saya Aken Diandra Putra Permata</h1>
+                        <h2 class="text-2xl md:text-3xl mb-6 text-purple-200">Pelajar keren</h2>
+                        <p class="text-lg mb-8 text-purple-100">Saya adalah pengembang web yang bersemangat dalam menciptakan solusi digital yang inovatif dan user-friendly.</p>
+                        <div class="flex space-x-4">
+                            <a href="#contact" class="bg-white text-purple-600 px-6 py-3 rounded-full font-semibold hover:bg-purple-100 transition">
+                                Hubungi Saya
+                            </a>
+                            <a href="#projects" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition">
+                                Lihat Proyek
+                            </a>
+                        </div>
+                        <div class="flex space-x-4 mt-8">
+                            <a href="#" class="text-white hover:text-purple-200 transition">
+                                <i class="fab fa-github text-2xl"></i>
+                            </a>
+                            <a href="#" class="text-white hover:text-purple-200 transition">
+                                <i class="fab fa-linkedin text-2xl"></i>
+                            </a>
+                            <a href="#" class="text-white hover:text-purple-200 transition">
+                                <i class="fab fa-instagram text-2xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center animate-fadeInUp">
+                        <div class="relative">
+                            <img src="aken.jpeg" alt="Profile" class="rounded-full w-80 h-80 object-cover border-8 border-white shadow-2xl">
+                            <div class="absolute -bottom-4 -right-4 bg-white rounded-full p-4 shadow-lg">
+                                <i class="fas fa-code text-3xl text-purple-600"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Tentang Saya</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-gray-50 rounded-lg p-8 shadow-lg">
+                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                            Saya adalah Seorang siswa SMK INFOKOM KOTA BOGOR.
+                        </p>
+                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                            Selama Pelajaran saya, saya telah mengerjakan berbagai proyek sederhana dengan perkembangan terbaru di dunia teknologi. 
+                            Saya percaya bahwa kolaborasi dan komunikasi yang baik adalah kunci dari kesuksesan sebuah proyek.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-purple-600 mb-2">3</div>
+                                <div class="text-gray-600">Proyek Selesai</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-purple-600 mb-2">4 bulan</div>
+                                <div class="text-gray-600">Tahun Pengalaman</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section id="history" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Riwayat Login</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800">Riwayat Kunjungan Anda</h3>
+                            <button id="clear-history" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600 transition">
+                                Hapus Riwayat
+                            </button>
+                        </div>
+                        <div id="history-list" class="space-y-3">
+                            <!-- History items will be added here dynamically -->
+                        </div>
+                        <div id="no-history" class="text-center py-8 text-gray-500">
+                            <i class="fas fa-history text-4xl mb-3"></i>
+                            <p>Belum ada riwayat login</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Riwayat Pendidikan</h2>
+                <div class="max-w-4xl mx-auto relative">
+                    <div class="timeline-line"></div>
+                    
+                    <!-- Education Item 1 -->
+                    <div class="flex flex-col md:flex-row items-center mb-12">
+                        <div class="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0">
+                            <div class="education-card bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center md:justify-end mb-2">
+                                    <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-semibold">2015-2016</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">TK Al Ma'arif</h3>
+                            </div>
+                        </div>
+                        <div class="flex justify-center items-center w-12 h-12 bg-purple-600 rounded-full text-white z-10">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-8"></div>
+                    </div>
+                    
+                    <!-- Education Item 2 -->
+                    <div class="flex flex-col md:flex-row items-center mb-12">
+                        <div class="md:w-1/2 md:pr-8"></div>
+                        <div class="flex justify-center items-center w-12 h-12 bg-purple-600 rounded-full text-white z-10">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-8">
+                            <div class="education-card bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center mb-2">
+                                    <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-semibold">2016-2022</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">SDN MARGAJAYA 1</h3>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Education Item 3 -->
+                    <div class="flex flex-col md:flex-row items-center mb-12">
+                        <div class="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0">
+                            <div class="education-card bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center md:justify-end mb-2">
+                                    <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-semibold">2022 - 2025</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">SMPN 2 DRAMAGA BOGOR</h3>
+                            </div>
+                        </div>
+                        <div class="flex justify-center items-center w-12 h-12 bg-purple-600 rounded-full text-white z-10">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-8"></div>
+                    </div>
+                    
+                    <!-- Education Item 4 -->
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-8"></div>
+                        <div class="flex justify-center items-center w-12 h-12 bg-purple-600 rounded-full text-white z-10">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-8">
+                            <div class="education-card bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center mb-2">
+                                    <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-semibold">2025-sekarang</span>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">SMK INFOKOM BOGOR</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Keahlian Saya</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- HTML -->
+                    <div class="skill-card bg-white rounded-lg p-6 shadow-lg text-center">
+                        <div class="text-5xl text-purple-600 mb-4">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">HTML</h3>
+                        <div class="space-y-2">
+                           
+                        </div>
+                    </div>
+
+                    <!-- CSS -->
+                    <div class="skill-card bg-white rounded-lg p-6 shadow-lg text-center">
+                        <div class="text-5xl text-purple-600 mb-4">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">CSS</h3>
+                        <div class="space-y-2">
+                            
+                        </div>
+                    </div>
+
+                    <!-- Javascript -->
+                    <div class="skill-card bg-white rounded-lg p-6 shadow-lg text-center">
+                        <div class="text-5xl text-purple-600 mb-4">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Javascript</h3>
+                        
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Proyek Unggulan</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg">
+                        <img src="kalkulator.jpeg" alt="Project 1" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Kalkulator</h3>
+                            <p class="text-gray-600 mb-4">Kalkulator sederhana.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm">HTML</span>
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm">CSS</span>
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm">JavaScript</span>
+                            </div>
+                            <div class="flex space-x-4">
+                                <a href="https://kunken253-git-main-akens-projects-a2d6ec6d.vercel.app?_vercel_share=f8jkWwpLM1wn5ChA1paJHJNX2MBt8rHe" target="_blank" class="demo-btn">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/kunken253/kunken253/blob/main/index.html" target="_blank" class="text-purple-600 hover:text-purple-800 transition">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg">
+                        <img src="Restoran.jpeg" alt="Project 2" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Kasir restoran</h3>
+                            <p class="text-gray-600 mb-4">simulasi kasir sebuah restoran.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm">Vue.js</span>
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm">Python</span>
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm">PostgreSQL</span>
+                            </div>
+                            <div class="flex space-x-4">
+                                <a href="https://index-html-ten-red.vercel.app/" target="_blank" class="demo-btn">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/kunken253/index.html/blob/main/index.html" target="_blank" class="text-purple-600 hover:text-purple-800 transition">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg">
+                        <img src="game ular.jpeg" alt="Project 3" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Game ular</h3>
+                            <p class="text-gray-600 mb-4">Game ular sederhana.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm">React</span>
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm">D3.js</span>
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm">Express</span>
+                            </div>
+                            <div class="flex space-x-4">
+                                <a href="https://index-html-fwzt.vercel.app/" target="_blank" class="demo-btn">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/kunken253/Ler/blob/main/index.html" target="_blank" class="text-purple-600 hover:text-purple-800 transition">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Hubungi Saya</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <form id="contact-form">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 font-semibold mb-2">Nama</label>
+                                    <input type="text" id="name" name="name" required 
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
+                                    <input type="email" id="email" name="email" required 
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition">
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label for="subject" class="block text-gray-700 font-semibold mb-2">Subjek</label>
+                                <input type="text" id="subject" name="subject" required 
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 font-semibold mb-2">Pesan</label>
+                                <textarea id="message" name="message" rows="5" required 
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" 
+                                    class="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition transform hover:scale-105">
+                                    Kirim Pesan
+                                </button>
+                            </div>
+                        </form>
+                        <div id="success-message" class="hidden mt-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Pesan Anda telah berhasil dikirim!
+                        </div>
+                    </div>
+                    <div class="mt-12 text-center">
+                        <div class="flex justify-center space-x-6">
+                            <div class="text-center">
+                                <i class="fas fa-envelope text-3xl text-purple-600 mb-2"></i>
+                                <p class="text-gray-700">aken.diandra@email.com</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-phone text-3xl text-purple-600 mb-2"></i>
+                                <p class="text-gray-700">+62 812 3456 7890</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-map-marker-alt text-3xl text-purple-600 mb-2"></i>
+                                <p class="text-gray-700">Jakarta, Indonesia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-8">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p>&copy; 2024 Aken Diandra. All rights reserved.</p>
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="#" class="hover:text-purple-400 transition">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                        <a href="#" class="hover:text-purple-400 transition">
+                            <i class="fab fa-linkedin text-2xl"></i>
+                        </a>
+                        <a href="#" class="hover:text-purple-400 transition">
+                            <i class="fab fa-twitter text-2xl"></i>
+                        </a>
+                        <a href="#" class="hover:text-purple-400 transition">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Back to Top Button -->
+        <button id="back-to-top" class="fixed bottom-8 right-8 bg-purple-600 text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition transform hover:scale-110 hidden">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script>
+        // Login functionality
+        const loginForm = document.getElementById('login-form');
+        const loginPage = document.getElementById('login-page');
+        const mainContent = document.getElementById('main-content');
+        const userDisplay = document.getElementById('user-display');
+        const mobileUserDisplay = document.getElementById('mobile-user-display');
+        const logoutBtn = document.getElementById('logout-btn');
+        const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+        const historyList = document.getElementById('history-list');
+        const noHistory = document.getElementById('no-history');
+        const clearHistoryBtn = document.getElementById('clear-history');
+
+        // Check if user is already logged in
+        window.addEventListener('DOMContentLoaded', () => {
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                showMainContent(user);
+                loadHistory();
+            }
+        });
+
+        // Login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            
+            const user = {
+                username: username,
+                loginTime: new Date().toISOString()
+            };
+            
+            // Save current user
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            
+            // Add to history
+            addToHistory(user);
+            
+            // Show main content
+            showMainContent(user);
+        });
+
+        // Show main content after login
+        function showMainContent(user) {
+            userDisplay.textContent = user.username;
+            mobileUserDisplay.textContent = user.username;
+            
+            loginPage.style.opacity = '0';
+            setTimeout(() => {
+                loginPage.style.display = 'none';
+                mainContent.style.display = 'block';
+            }, 500);
+        }
+
+        // Logout functionality
+        logoutBtn.addEventListener('click', logout);
+        mobileLogoutBtn.addEventListener('click', logout);
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            
+            mainContent.style.display = 'none';
+            loginPage.style.display = 'flex';
+            loginPage.style.opacity = '1';
+            
+            // Reset form
+            loginForm.reset();
+        }
+
+        // History functionality
+        function addToHistory(user) {
+            let history = JSON.parse(localStorage.getItem('loginHistory')) || [];
+            
+            // Add new login to history
+            history.unshift({
+                username: user.username,
+                loginTime: user.loginTime
+            });
+            
+            // Keep only last 10 logins
+            if (history.length > 10) {
+                history = history.slice(0, 10);
+            }
+            
+            // Save history
+            localStorage.setItem('loginHistory', JSON.stringify(history));
+        }
+
+        function loadHistory() {
+            const history = JSON.parse(localStorage.getItem('loginHistory')) || [];
+            
+            if (history.length === 0) {
+                noHistory.style.display = 'block';
+                historyList.innerHTML = '';
+                return;
+            }
+            
+            noHistory.style.display = 'none';
+            historyList.innerHTML = '';
+            
+            history.forEach((item, index) => {
+                const date = new Date(item.loginTime);
+                const formattedDate = date.toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+                const formattedTime = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item flex justify-between items-center p-3 border-b border-gray-200 rounded';
+                historyItem.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="bg-purple-100 text-purple-600 rounded-full p-2 mr-3">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">${item.username}</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-medium">${formattedDate}</div>
+                        <div class="text-xs text-gray-500">${formattedTime}</div>
+                    </div>
+                `;
+                
+                historyList.appendChild(historyItem);
+            });
+        }
+
+        // Clear history
+        clearHistoryBtn.addEventListener('click', () => {
+            if (confirm('Apakah Anda yakin ingin menghapus semua riwayat login?')) {
+                localStorage.removeItem('loginHistory');
+                loadHistory();
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Contact form submission
+        const contactForm = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate form submission
+            setTimeout(() => {
+                successMessage.classList.remove('hidden');
+                contactForm.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.classList.add('hidden');
+                }, 5000);
+            }, 1000);
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
